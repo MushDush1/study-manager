@@ -1,0 +1,17 @@
+[Unit]
+Description=Study Manager API
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/study-manager/server
+EnvironmentFile=/etc/study-manager/api.env
+ExecStart=/opt/study-manager/server/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000 --proxy-headers
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
